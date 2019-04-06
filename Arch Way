@@ -1,0 +1,47 @@
+## Arch Linux install 2019 APRIL::- "The Arch Way"
+
+https://wiki.archlinux.org/index.php/installation_guide
+
+# Verify Boot Mode (UEFI)
+
+ls /sys/firmware/efi/efivars
+
+# Setup Wifi
+
+wifi-menu
+ping archlinux.org
+
+Update the system clock
+
+# timedatectl set-ntp true
+
+Partition the disks
+
+cfdisk /dev/sdxx
+
+partition scheme
+
+Efi/Boot	= 300MB
+Root	= above 50GB
+Swap	= 8GB
+
+
+# Format Root
+
+mkfs.ext4 /dev/sdx2
+
+# Format and make swap
+
+mkswap /dev/sdX
+swapon /dev/sdX
+
+# Format Efi/boot
+
+mkfs.fat -F32 /dev/sdx1
+
+# Mount the partition
+
+mount /dev/sdX2 /mnt
+mkdir /mnt/boot
+mount /dev/sdx1 /mnt/boot
+
